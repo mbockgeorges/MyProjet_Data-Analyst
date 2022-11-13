@@ -1,68 +1,69 @@
-# Données du système Ford GoBike:201902-fordgobike-tripdata
+## Ford GoBike:201902-fordgobike-tripdata
  
-## par MBOCK MBOCK Georges Christian
+## by MBOCK Georges Christian
 
 
-## Description du Jeu de données
+## Description of the dataset
 
 
-201902-fordgobike-tripdata est un jeu de données du Sytème Ford GoBike [cliquer ici](https://github.com/BetaNYC/Bike-Share-Data-Best-Practices/wiki/Bike-Share-Data-Systems.).
-Cet ensemble de données comprend des informations sur cent quatre-vingt-trois mille quatre cent douze(183412) trajets individuels effectués dans un système de partage de vélos couvrant la grande région de la baie de San Francisco.
-Ainsi, ces informations sont organisées dans seize(16) colonnes entre autres:
+201902-fordgobike-tripdata is a dataset of the Ford GoBike System [click here](https://github.com/BetaNYC/Bike-Share-Data-Best-Practices/wiki/Bike-Share-Data-Systems.).
+This dataset includes information on one hundred and eighty-three thousand four hundred and twelve(183412) individual trips taken in a bike sharing system covering the greater San Francisco Bay Area.
+Thus, this information is organized in sixteen(16) columns among others:
 
-'duration_sec': durée du trajet (en seconde)
+'duration_sec': trip duration (in seconds)
 
-'start_time', ('end_time'): date du début, (de fin) du trajet (AA-MM-JJ h:m:s.t)
+start_time', ('end_time'): start (end) date of the trip (YY-MM-DD h:mm:s.t)
 
-'start_station_id', ('end_station_id'): numero d'identification du lieu du commencement, (de fin) du trajet
+start_station_id', ('end_station_id'): identification number of the place where the trip started, (ended)
 
-'start_station_name', ('end_station_name'): nom du lieu de commencement, (de fin)du trajet
+start_station_name', ('end_station_name'): name of the place where the journey starts (ends)
 
-'start_station_latitude','start_station_longitude', 'end_station_latitude', 'end_station_longitude': coordonnées des lieux de commencement et fin du trajet
+start_station_latitude', 'start_station_longitude', 'end_station_latitude', 'end_station_longitude': coordinates of the start and end locations of the trip
 
-'bike_id': immatriculation du vélo
+bike_id': bike registration number
 
-'user_type': type d'utilisateur(Abonné ou Client)
+user_type': type of user (subscriber or customer)
 
-'member_birth_year', ('member_gender'): année de naissance de l'utilisateur, (sexe de l'utilisateur)
+member_birth_year', ('member_gender'): year of birth of the user, (gender of the user)
 
-'bike_share_for_all_trip': type de vélo(Vélo tout terrain ou non)
+bike_share_for_all_trip': type of bike (Mountain bike or not)
 
-## Résumé des conclusions
-
-
-**Dans l'évaluation des données**
-j'ai constaté plusieurs problèmes entre autres:
-* Les problèmes de l'ordre que j'ai résolu en éclatant la variable 'start_time' en 'jour' et 'heure'puis en supprimant d'autres variables comme 'start_station_name' et 'end_station_name' qui ne nous semblant pas pertinentes. Cependant, j'ai ajouté la variable 'start_Week' que j'ai jugé pertinent de savoir à quel moment du mois en terme de semaine les trajets ont le plus débutés.
-
-* Les problèmes de qualité comme : - Le mauvais formatage des types de certaines variables que j'ai retransformé en véritable type par exemple la variable 'member_birth_year' qui a été tranformée de simple float en variable catégorielle.
-- Les données manquantes :j'ai juste supprimé les lignes dont les valeurs manquaient pour la variable 'start_station_name' et j'ai séparé du jeu de données principal les lignes dont les valeurs manquaient pour la variable 'member_gender' dont j'ai exploré par la suite.
-
-**Dans l'exploration**:
-* j'ai remanqué des valeurs exceptionnelles de durée de trajet, ce qui m'a motivé organiser la variable 'duration_sec' en différent type de trajet selon leur durée. Entre autre type, nous avons: Pour les utilisateurs dont la valeur la 'member_gender' est connue  
-type_1 --->Au plus 20minutes;
-type_2 --->De 21 à 40minutes;
-type_3 --->De 41 à 1heure;
-type_4 --->De 1heure à 2.5heures;
-type_5 --->De 2.5heures à 7heures;
-type_6 ---> Plus de 7heures
-
-Et pour les utilisateurs dont la valeur 'member_gender' n'est pas connue nous avons les différents trajets suivants:
-type_1 ---> au plus 20minutes;
-type_2 --->De 21 à 40minutes;
-type_3 --->De 41 à 1heure;
-type_4 --->De 1heure à 2.5heures;
-type_5 --->De 2.5heures à 5.5heures;
-type_6 ---> Plus de 5.5heures
-
-* Pour les utilisateurs dont le sexe est connu, j'ai remarqué le fait qu'un utilisateur soit un Abonné ou Client n'est pas directement influencé ni son sexe, ni par le moment du mois en terme de semaine ou le moment de la journée en terme heures aucours duquel il effectue son trajet. Néammoins, j'ai remarqué une faible influence du type de trajet sur le fait qu'un utilisateur soit un Abonné ou Client. De plus, cette influence semble davantage créer une influence du sexe sur le fait qu'un utilisateur soit un Abonné ou Client lorsqu'on sait que l'utiisateur effectue le trajet du type_5. J'ai aussi remarqué que aucun utilisateur de type Client n'utilise les vélos du type tout déplacement.
-
-* Pour les utilisateurs dont le sexe est inconnu, j'ai remarqué que le fait d'Abonné ou Client semble être directement influencé par le type du trajet. 
+## Summary of findings
 
 
-## Principales idées pour la présentation
+**In the evaluation of the data**
+I found several problems among others:
+* The problems with the order I solved by breaking the variable 'start_time' into 'day' and 'time'and then removing other variables like 'start_station_name' and 'end_station_name' that we felt were not relevant. However, I added the variable 'start_Week' that I thought was relevant to know at what time of the month in terms of week the trips started the most.
 
-Pour cette présentation, je commence par donner la répartition en fréquence absolue de type d'utilisateurs, puis je me concentre différentes relations éventuellement entre ma variable d'intérêt 'user_type' et d'autres variables comme : 'duration_sec' Vs 'type_trip', 'member_gender' Vs 'user_type', 'type_trip' Vs 'user_type' et 'bike_share_for_all_trip' Vs 'user_type' puis des relations multivariées comme : Type_trajet' ='Type5'|'user_type' Vs 'menber_gender', et enfin 'member_gender'=('Female' or 'Male' or 'Other')|'user_type' Vs 'bike_share_for_all_trip' et pour terminer je présente l'influence du type de trajet sur le type d'utilisateur de sexe non connu 'user_type' Vs 'type_trip'.
+* The bad formatting of the types of certain variables that I transformed back into real type for example the variable 'member_birth_year' which was transformed from simple float into categorical variable.
+- Missing data: I just deleted the rows with missing values for the variable 'start_station_name' and I separated from the main dataset the rows with missing values for the variable 'member_gender' which I explored afterwards.
+
+**In the exploration**:
+* I reshuffled some exceptional values of trip duration, which motivated me to organize the variable 'duration_sec' into different types of trips according to their duration. Among other types, we have: For users with a known member_gender value  
+type_1 --->At most 20 minutes;
+type_2 --->From 21 to 40 minutes;
+type_3 --->From 41 to 1 hour;
+type_4 --->From 1 hour to 2.5 hours;
+type_5 --->From 2.5 hours to 7 hours;
+type_6 --->More than 7 hours
+
+And for the users whose 'member_gender' value is not known we have the following different routes:
+type_1 --->At most 20minutes;
+type_2 --->From 21 to 40minutes;
+type_3 --->From 41 to 1 hour;
+type_4 --->From 1 hour to 2.5 hours;
+type_5 --->From 2.5hours to 5.5hours;
+type_6 ---> More than 5.5 hours
+
+* For users whose gender is known, I noticed that the fact that a user is a Subscriber or Customer is not directly influenced by his gender, nor by the time of the month in terms of week or the time of the day in terms of hours during which he makes his trip. Nevertheless, I noticed a weak influence of the type of trip on whether a user is a Subscriber or a Customer. Moreover, this influence seems to create more of an influence of gender on whether a user is a Subscriber or a Customer when it is known that the user makes the type_5 trip. I also noticed that no Customer type users use the all-trip type bikes.
+
+* For users whose gender is unknown, I noticed that whether they are a Subscriber or a Customer seems to be directly influenced by the type of trip. 
+
+
+## Main ideas for the presentation
+
+For this presentation, I start by giving the absolute frequency distribution of user type, then focus on different relationships possibly between my variable of interest 'user_type' and other variables like: 'duration_sec' Vs 'type_trip', 'member_gender' Vs 'user_type', 'type_trip' Vs 'user_type' and 'bike_share_for_all_trip' Vs 'user_type' and then multivariate relationships like : 'Type_trajet' = 'Type5'|'user_type' Vs 'menber_gender', and finally 'member_gender'=('Female' or 'Male' or 'Other')|'user_type' Vs 'bike_share_for_all_trip' and to finish I present the influence of the type of trip on the type of user of unknown gender 'user_type' Vs 'type_trip'.
+
 
 
 
